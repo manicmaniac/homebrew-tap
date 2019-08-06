@@ -1,4 +1,4 @@
-class XCNew < Formula
+class Xcnew < Formula
   desc 'A command line interface to make a project for iOS Single View App.'
   homepage 'https://github.com/manicmaniac/xcnew'
   url 'https://github.com/manicmaniac/xcnew/archive/0.1.0.tar.gz'
