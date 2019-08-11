@@ -3,11 +3,7 @@ osx_image: xcode10.2
 before_install:
   - brew update
 script:
-  - |
-    for f in Formula/*.rb
-    do
-      brew audit $f
-      brew install -v $f
-      brew test $f
-      brew uninstall $f
-    done
+  - brew audit Formula/*.rb
+  - brew install Formula/*.rb
+  - brew test Formula/*.rb
+  - brew uninstall Formula/*.rb
