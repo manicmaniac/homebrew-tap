@@ -1,9 +1,0 @@
-os: osx
-osx_image: xcode10.2
-before_install:
-  - brew update
-script:
-  - brew audit Formula/*.rb
-  - brew install Formula/*.rb
-  - brew test Formula/*.rb
-  - brew uninstall Formula/*.rb

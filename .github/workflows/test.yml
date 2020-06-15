@@ -1,0 +1,17 @@
+name: Test
+on: [push]
+jobs:
+  install-test:
+    runs-on: macOS-10.15
+    strategy:
+      fail-fast: false
+      matrix:
+        xcode: ["11.5", "11.4", "11.3"]
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo xcode-select -s /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+      - run: brew update
+      - run: brew audit Formula/*.rb
+      - run: brew install Formula/*.rb
+      - run: brew test Formula/*.rb
+      - run: brew uninstall Formula/*.rb
