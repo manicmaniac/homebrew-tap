@@ -1,7 +1,7 @@
 Homebrew Tap
 ============
 
-[![Build Status](https://travis-ci.org/manicmaniac/homebrew-tap.svg?branch=master)](https://travis-ci.org/manicmaniac/homebrew-tap)
+[![Build Status](https://github.com/manicmaniac/homebrew-tap/workflows/Test/badge.svg)](https://github.com/manicmaniac/homebrew-tap/actions)
 
 This is the repository for my personal packages.
 
