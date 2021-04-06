@@ -15,5 +15,9 @@ jobs:
       - run: brew update
       - run: brew audit --formulae Formula/*.rb
       - run: brew install --formulae Formula/*.rb
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          path: ~/Library/Logs/Homebrew/xcnew/
       - run: brew test Formula/*.rb
       - run: brew uninstall --formulae Formula/*.rb
