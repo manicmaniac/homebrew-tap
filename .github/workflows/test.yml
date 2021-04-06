@@ -10,6 +10,7 @@ jobs:
     env:
       BUNDLE_JOBS: 4
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
+      HOMEBREW_ARCH: native
     steps:
       - uses: actions/checkout@v2
       - run: brew update
