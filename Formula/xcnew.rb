@@ -7,7 +7,7 @@ class Xcnew < Formula
   depends_on :xcode
 
   def install
-    system({ "PREFIX" => prefix }, "make", "install")
+    system "make", "install", "PREFIX='#{prefix}'"
   end
 
   test do
