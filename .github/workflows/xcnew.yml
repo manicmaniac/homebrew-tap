@@ -1,0 +1,21 @@
+name: xcnew
+on:
+  repository_dispatch:
+    types:
+      - update-xcnew
+jobs:
+  update-xcnew:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Export version
+        run: echo "::set-env name=XCNEW_VERSION::$(basename ${{ github.event.client_payload.url }})"
+      - uses: actions/checkout@v2
+      - name: Make changes
+        run: ./bin/update-xcnew "$XCNEW_VERSION"
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          branch: update-xcnew-to-${{ env.XCNEW_VERSION }}
+          commit-message: Update xcnew to ${{ env.XCNEW_VERSION }}
+          title: Update xcnew to ${{ env.XCNEW_VERSION }}
+          body: "${{ github.event.client_payload.url }}"
