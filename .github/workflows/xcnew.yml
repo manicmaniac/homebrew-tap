@@ -3,6 +3,19 @@ on:
   repository_dispatch:
     types:
       - update-xcnew
+      # You can run this job like
+      # curl --header 'Accept: application/vnd.github.v3+json' \
+      #      --header "Authorization: token $GITHUB_TOKEN" \
+      #      --header 'Content-Type: application/json' \
+      #      --data-binary @- \
+      #      https://api.github.com/repos/manicmaniac/homebrew-tap/dispatches <<EOF
+      # {
+      #   "event_type": "update-xcnew",
+      #   "client_payload": {
+      #     "version": "$VERSION"
+      #   }
+      # }
+      # EOF
 jobs:
   update-xcnew:
     runs-on: ubuntu-18.04
