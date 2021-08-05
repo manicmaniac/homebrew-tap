@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+require 'digest'
+require 'open-uri'
+require 'ripper'
+require 'rss'
+require 'uri'
+
+def fetch_latest_version(rss_url)
+  open(rss_url) do |rss|
+    RSS::Parser.parse(rss).items.first.title.content
+  end
+end
+
+def update_formula(formula_path, url, sha256)
+  source = File.read(formula_path)
+  destination = ''
+  state = :initial
+  Ripper.lex(source).each do |_, type, token|
+    case [state, type]
+    when [:initial, :on_ident]
+      state = token.to_sym if %w[url sha256].include?(token)
+    when [:url, :on_tstring_content]
+      token = url
+      state = :initial
+    when [:sha256, :on_tstring_content]
+      token = sha256
+      state = :initial
+    end
+    destination += token
+  end
+  File.write(formula_path, destination)
+end
+
+if ARGV.size == 1
+  version = ARGV[0]
+else
+  version = fetch_latest_version('https://github.com/manicmaniac/xcnew/releases.atom')
+end
+
+url = "https://github.com/manicmaniac/xcnew/archive/#{version}.tar.gz"
+sha256 = Digest::SHA2.hexdigest(open(url).read)
+Dir.chdir(`git rev-parse --show-toplevel`.chomp) do
+  update_formula('Formula/xcnew.rb', url, sha256)
+end
