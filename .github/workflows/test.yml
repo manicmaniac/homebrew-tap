@@ -13,8 +13,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: brew update
-      - run: brew audit --formulae Formula/*.rb
-      - run: brew install --formulae Formula/*.rb
+      # Workaround for https://github.com/Homebrew/brew/issues/12506
+      - run: brew tap-new --no-git manicmaniac/tap
+      - run: cp Formula/xcnew.rb $(brew --repo manicmaniac/tap)/Formula
+      - run: brew audit --formulae manicmaniac/tap/xcnew
+      - run: brew install --formulae Formula/xcnew.rb
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
