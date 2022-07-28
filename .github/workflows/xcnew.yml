@@ -24,7 +24,7 @@ jobs:
       - name: Make changes
         run: ./bin/update-xcnew "${{ github.event.client_payload.version }}"
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v4
         with:
           branch: update-xcnew-to-${{ github.event.client_payload.version }}
           commit-message: Update xcnew to ${{ github.event.client_payload.version }}
