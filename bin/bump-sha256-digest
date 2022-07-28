@@ -1,0 +1,56 @@
+#!/usr/bin/env ruby
+
+require 'digest'
+require 'erb'
+require 'open-uri'
+require 'optparse'
+require 'ripper'
+
+class Formula
+  attr_accessor :url, :sha256
+
+  def initialize(path)
+    @path = path
+    source = File.read(@path)
+    buffer = ''
+    state = :initial
+    Ripper.lex(source).each do |_, type, token|
+      case [state, type]
+      when [:initial, :on_ident]
+        state = token.to_sym if %w[url sha256].include?(token)
+      when [:url, :on_tstring_content]
+        @url = token
+        token = '<%= url %>'
+        state = :initial
+      when [:sha256, :on_tstring_content]
+        @sha256 = token
+        token = '<%= sha256 %>'
+        state = :initial
+      end
+      buffer += token
+      @template = ERB.new(buffer)
+    end
+  end
+
+  def to_s
+    @template.result(binding)
+  end
+end
+
+inplace = false
+parser = OptionParser.new do |opts|
+  opts.banner = "usage: #{opts.program_name} <FILE> [FILE...]"
+
+  opts.on('-i', '--inplace', 'Edit file in-place') do |_|
+    inplace = true
+  end
+end
+parser.parse(ARGV).each do |path|
+  formula = Formula.new(path)
+  formula.sha256 = Digest::SHA2.hexdigest(URI.open(formula.url).read)
+  if inplace
+    File.write(path, formula.to_s)
+  else
+    puts(formula.to_s)
+  end
+end
