@@ -18,7 +18,7 @@ jobs:
       BUNDLE_JOBS: 4
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - run: brew update
       - run: brew audit --formulae Formula/*.rb
       - run: brew install --formulae Formula/*.rb

@@ -20,7 +20,7 @@ jobs:
   update-xcnew:
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Make changes
         run: ./bin/update-xcnew "${{ github.event.client_payload.version }}"
       - name: Create pull request
