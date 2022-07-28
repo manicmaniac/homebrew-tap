@@ -25,6 +25,8 @@ jobs:
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
-          path: ~/Library/Logs/Homebrew/xcnew/
+          path: |
+            ~/Library/Logs/Homebrew/xcnew/
+            ~/Library/Logs/Homebrew/class-dump/
       - run: brew test Formula/*.rb
       - run: brew uninstall --formulae Formula/*.rb
