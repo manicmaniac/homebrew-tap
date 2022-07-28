@@ -1,8 +1,8 @@
 class ClassDump < Formula
   desc "Generate Objective-C headers from Mach-O files (forked from nygard/class-dump)"
   homepage "https://github.com/manicmaniac/class-dump"
-  url "https://github.com/manicmaniac/class-dump/archive/3.5-0.1.0.tar.gz"
-  sha256 "e17c98776c01ab397b8b1b2c56062e27ef96a4d59f314bdda840c07490ca68be"
+  url "https://github.com/manicmaniac/class-dump/archive/3.5-0.1.1.tar.gz"
+  sha256 "40f5f4c91b8dae9c0e2c017d386b49d38ce1191638d8555933f770b68d500a48"
 
   depends_on :xcode
 
