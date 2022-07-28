@@ -3,5 +3,10 @@
   "extends": [
     "config:base"
   ],
-  "ignoreUnstable": false
+  "packageRules": [
+      {
+          "matchPackageNames": ["manicmaniac/class-dump"],
+          "versioning": "regex:^(?<compatibility>3\\.5)-(?<major>\\d+)\\.(?<minor>\\d+)(\\.(?<patch>\\d+))?$"
+      }
+  ]
 }
