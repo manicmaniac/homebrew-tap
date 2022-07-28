@@ -7,7 +7,7 @@ class ClassDump < Formula
   depends_on :xcode
 
   def install
-    xcodebuild "install", "-project", "class-dump.xcodeproj", "-target", "class-dump", "-configuration", "Release", "DSTROOT=#{buildpath}"
+    xcodebuild "install", "-project", "class-dump.xcodeproj", "-target", "class-dump", "DSTROOT=#{buildpath}"
     bin.install buildpath/"class-dump"
   end
 
