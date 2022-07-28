@@ -22,7 +22,7 @@ jobs:
       - run: brew update
       - run: brew audit --formulae Formula/*.rb
       - run: brew install --formulae Formula/*.rb
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           path: |
