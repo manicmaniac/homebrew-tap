@@ -10,14 +10,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        xcode: ["13.1", "12.5", "11.7"]
+        xcode: ["14.1", "13.4.1", "13.1", "12.5"]
         include:
+        - macos: macOS-12
+          xcode: "14.1"
+        - macos: macOS-12
+          xcode: "13.4.1"
         - macos: macOS-11
           xcode: "13.1"
         - macos: macOS-11
           xcode: "12.5"
-        - macos: macOS-10.15
-          xcode: "11.7"
     env:
       BUNDLE_JOBS: 4
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer
