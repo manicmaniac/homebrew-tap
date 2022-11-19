@@ -5,6 +5,7 @@ class Xcnew < Formula
   sha256 "923be76e7a067ccb1d4a213e6281611bd6f0744764bcaf6f7bd71a9c303cb7b7"
 
   depends_on :xcode
+  env :std
 
   def install
     system "make", "install", "PREFIX='#{prefix}'"
