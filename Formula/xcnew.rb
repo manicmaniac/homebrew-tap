@@ -1,8 +1,8 @@
 class Xcnew < Formula
   desc "Missing command-line interface to make a project for iOS Single View App"
   homepage "https://github.com/manicmaniac/xcnew"
-  url "https://github.com/manicmaniac/xcnew/archive/0.6.3.tar.gz"
-  sha256 "4d33ef518d8d87b76cee90b52e68eb42edfa3feea6c6b7fea9ba76a17148a07c"
+  url "https://github.com/manicmaniac/xcnew/archive/0.6.4.tar.gz"
+  sha256 "c97c11109eaf4ff588e21e855e4db3a9c40f72351292ed0f0cd2aeea9d4a0c0e"
 
   depends_on :xcode
   env :std
