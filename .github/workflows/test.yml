@@ -36,3 +36,9 @@ jobs:
             ~/Library/Logs/Homebrew/class-dump/
       - run: brew test Formula/*.rb
       - run: brew uninstall --formulae Formula/*.rb
+  status-check:
+    runs-on: ubuntu-20.04
+    needs: install-test
+    if: failure()
+    steps:
+      - run: exit 1
