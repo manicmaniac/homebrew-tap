@@ -4,6 +4,9 @@ on:
     paths:
       - '.github/workflows/test.yml'
       - 'Formula/*.rb'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   install-test:
     runs-on: ${{ matrix.macos }}
