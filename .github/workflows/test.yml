@@ -4,6 +4,9 @@ on:
     paths:
       - '.github/workflows/test.yml'
       - 'Formula/*.rb'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   install-test:
     runs-on: ${{ matrix.macos }}
@@ -36,3 +39,9 @@ jobs:
             ~/Library/Logs/Homebrew/class-dump/
       - run: brew test Formula/*.rb
       - run: brew uninstall --formulae Formula/*.rb
+  status-check:
+    runs-on: ubuntu-20.04
+    needs: install-test
+    if: failure()
+    steps:
+      - run: exit 1
