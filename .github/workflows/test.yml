@@ -30,8 +30,17 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: brew update
-      - run: brew audit --formulae Formula/*.rb
-      - run: brew install --formulae Formula/*.rb
+      - name: Create new tap
+        run: |
+          brew tap-new --no-git manicmaniac/tap
+          cp Formula/*.rb "$(brew --repository manicmaniac/tap)/Formula"
+      - name: Audit formulas
+        run: |
+          for file in "$(brew --repository manicmaniac/tap)/Formula/"*
+          do
+            brew audit --formula "$(basename "$file" .rb)"
+          done
+      - run: brew install --formula Formula/*.rb
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
@@ -39,7 +48,7 @@ jobs:
             ~/Library/Logs/Homebrew/xcnew/
             ~/Library/Logs/Homebrew/class-dump/
       - run: brew test Formula/*.rb
-      - run: brew uninstall --formulae Formula/*.rb
+      - run: brew uninstall --formula Formula/*.rb
   status-check:
     runs-on: ubuntu-20.04
     needs: install-test
