@@ -41,7 +41,7 @@ jobs:
             brew audit --formula "$(basename "$file" .rb)"
           done
       - run: brew install --formula Formula/*.rb
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           path: |
