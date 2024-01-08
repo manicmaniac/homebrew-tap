@@ -50,7 +50,7 @@ jobs:
       - run: brew test Formula/*.rb
       - run: brew uninstall --formula Formula/*.rb
   status-check:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: install-test
     if: failure()
     steps:
