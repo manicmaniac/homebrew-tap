@@ -15,15 +15,9 @@ jobs:
       matrix:
         include:
         - macos: macOS-13
-          xcode: "14.3"
-        - macos: macOS-12
-          xcode: "14.1"
-        - macos: macOS-12
-          xcode: "13.4.1"
-        - macos: macOS-11
-          xcode: "13.1"
-        - macos: macOS-11
-          xcode: "12.5"
+          xcode: "14.3.1"
+        - macos: macOS-14
+          xcode: "15.4"
     env:
       BUNDLE_JOBS: 4
       DEVELOPER_DIR: /Applications/Xcode_${{ matrix.xcode }}.app/Contents/Developer

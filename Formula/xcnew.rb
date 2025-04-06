@@ -12,8 +12,8 @@ class Xcnew < Formula
   end
 
   test do
-    assert_predicate man1/"xcnew.1", :exist?
+    assert_path_exists man1/"xcnew.1"
     system bin/"xcnew", "Example", testpath/"Example"
-    assert_predicate testpath/"Example/Example.xcodeproj/project.pbxproj", :exist?
+    assert_path_exists testpath/"Example/Example.xcodeproj/project.pbxproj"
   end
 end
